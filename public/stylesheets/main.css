@@ -1,0 +1,15 @@
+.img-thumbnail {
+    margin-top: 50px
+}
+
+.delete-form {
+    display: inline;
+}
+
+.checked {
+    color: orange;
+}
+
+#jumbotron-top-margin {
+    margin-top: 50px;
+}

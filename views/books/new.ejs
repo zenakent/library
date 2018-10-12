@@ -1,0 +1,41 @@
+<% include ../partials/header %>
+<div class="container">
+    <div class="row">
+        <div class="col-xl-12"><h1 style="text-align: center">Add a new book</h1></div>
+        <div style="width: 30%; margin: 25px auto;">
+            <form action="/library" method="POST">
+                <div class="form-group">
+                    <input class="form-control" type="text" name="name" placeholder="name">
+                 </div>
+                <div class="form-group">
+                    <input class="form-control" type="text" name="author" placeholder="author">
+                </div>
+                <div class="form-group">
+                    <input class="form-control" type="text" name="image" placeholder="img url">
+                </div>
+                <div class="form-group">
+                    <input class="form-control" type="text" name="genre" placeholder="genre">
+                </div>
+                <div class="form-group">
+                    <input class="form-control" type="text" name="publisher" placeholder="publisher">
+                </div>
+                <div class="form-group">
+                    <input class="form-control" type="number" name="available" placeholder="how many books are available">
+                </div>
+                <div class="form-group">
+                    <textarea class="form-control" type="text" name="summary" placeholder="summary" rows="10" cols="30"></textarea>
+                </div>
+                
+                
+                <div class="form-group">
+                    <button class="btn btn-outline-primary btn-lg btn-block">Submit</button>
+                </div>
+            </form>
+            <a href="/library">Go Back</a>
+        </div>
+    </div>
+</div>
+
+
+
+<% include ../partials/footer %>

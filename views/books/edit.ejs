@@ -1,0 +1,45 @@
+<% include ../partials/header %>
+<div class="container">
+    <div class="row">
+        <div class="col-xl-12"><h1 style="text-align: center">Edit </h1></div>
+        <div style="width: 30%; margin: 25px auto;">
+            <form action="/library/<%= book._id %>?_method=PUT" method="POST">
+                <div class="form-group">
+                    <p>Title</p>
+                    <input class="form-control" type="text" name="book[name]" value="<%= book.name%>">
+                <div class="form-group">
+                    <p>Author</p>
+                    <input class="form-control" type="text" name="book[author]" value="<%= book.author%>">
+                </div>
+                <div class="form-group">
+                    <p>Image</p>
+                    <input class="form-control" type="text" name="book[image]" value="<%= book.image%>">
+                </div>
+                <div class="form-group">
+                    <p>Genre</p>
+                    <input class="form-control" type="text" name="book[genre]" value="<%= book.genre%>">
+                </div>
+                <div class="form-group">
+                    <p>Publisher</p>
+                    <input class="form-control" type="text" name="book[publisher]" value="<%= book.publisher%>">
+                </div>
+                <div class="form-group">
+                    <p>Available</p>
+                    <input class="form-control" type="number" name="book[available]" value="<%= book.available%>">
+                </div>
+                <div class="form-group">
+                    <p>Summary</p>
+                    <input class="form-control" type="text" name="book[summary]" value="<%= book.summary%>">
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-outline-primary btn-lg btn-block">Submit</button>
+                </div>
+            </form>
+            <a href="/library">Go Back</a>
+        </div>
+    </div>
+</div>
+
+
+
+<% include ../partials/footer %>

@@ -1,0 +1,9 @@
+<% include ../partials/header %>
+
+<h4 class="text-center"><a href="#"><%= book.name %></a></h4>
+                    <h5 class="text-center">by <%= book.author %></a></h5>
+                    <p class="text-center">genre: <%= book.genre %></p>
+                    <p class="text-center">Reserved by: <%= book.reserves.reserved%> </p>
+                    <h5 class="text-center"> Overview</h5>
+
+<% include ../partials/footer %>

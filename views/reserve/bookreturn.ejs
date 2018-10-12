@@ -1,0 +1,25 @@
+<% include ../partials/header %>
+
+<div class="containter">
+    
+    
+    <script>console.log("HELLO THERE")</script>
+    
+    
+    
+    
+    
+    <h1>ARE YOU SURE THAT THE BOOK IS RETURNED?</h1>
+    
+    
+    
+    <form  id="delete-form" class="delete-form text-center" action="/library/<%= book_id %>/reserve/<%= reserve._id %>?_method=DELETE" method="POST">
+        <button class="btn btn-danger btn-md">YES</button>
+    </form>
+    <a class="btn btn-primary" href="/library/<%= book_id %>">
+        NO, GO BACK
+    </a>
+    
+</div>
+
+<% include ../partials/footer %>

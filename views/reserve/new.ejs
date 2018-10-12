@@ -1,0 +1,20 @@
+<% include ../partials/header %>
+<div class="container">
+    <div class="row">
+        <div class="col-xl-12"><h1 style="text-align: center">Reserve this book? <%= book.name %></h1></div>
+        <div style="width: 30%; margin: 25px auto;">
+            <form action="/library/<%= book._id %>/reserve" method="POST">
+                
+                    <!-- name="reserve[text]" is req.body.reserve -->
+                 <div class="form-group">
+                    <input class="form-control" type="number" name="available" placeholder="how many books are available">
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-outline-primary btn-lg btn-block">Submit</button>
+                </div>
+            </form>
+            <a href="/library">Go Back</a>
+        </div>
+    </div>
+</div>
+<% include ../partials/footer %>
