@@ -52,22 +52,21 @@ router.post("/", middleware.isLoggedIn,  async function(req, res) {
         } else {
             book.available--;
             await book.save();
-            req.flash("success", "You have successfully borrowed this book. You may pick it up at the library in 2 days at 10:00am" );
-            res.redirect("/library/" + book._id); 
-        }
-        
-        let newNotification = {
+            
+            
+            let newNotification = {
             username:req.user.username,
             bookId: book.id,
             bookName: book.name
+            }
+        
+            let notification = await Notification.create(newNotification);
+            user.notifications.push(notification);
+            user.save();
+            
+            req.flash("success", "You have successfully borrowed this book. You may pick it up at the library in 2 days at 10:00am" );
+            res.redirect("/library/" + book._id); 
         }
-        
-        
-        let notification = await Notification.create(newNotification);
-        user.notifications.push(notification);
-        user.save();
-       
-        
     } catch(err) {
       req.flash('error', 'Something went wrong!');
       res.redirect('back');

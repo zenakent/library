@@ -7,17 +7,17 @@
             <a href="/library/<%= book._id %>">Go back to the book page</a>
             <div class="thumbnail">
                 <div class="caption-full">
-                    <% if (books.rating === 0) { %>
+                    <% if (book.rating === 0) { %>
                     <h5>
                         <em>No reviews yet.</em>
                     </h5>
                     <% } else { %>
                     <p>
                         <span class="fas fa-star checked"></span>
-                        <span class="fas fa-star <% if (books.rating > 1.5) { %> checked <% } %>"></span>
-                        <span class="fas fa-star <% if (books.rating > 2.5) { %> checked <% } %>"></span>
-                        <span class="fas fa-star <% if (books.rating > 3.5) { %> checked <% } %>"></span>
-                        <span class="fas fa-star <% if (books.rating > 4.5) { %> checked <% } %>"></span>
+                        <span class="fas fa-star <% if (book.rating > 1.5) { %> checked <% } %>"></span>
+                        <span class="fas fa-star <% if (book.rating > 2.5) { %> checked <% } %>"></span>
+                        <span class="fas fa-star <% if (book.rating > 3.5) { %> checked <% } %>"></span>
+                        <span class="fas fa-star <% if (book.rating > 4.5) { %> checked <% } %>"></span>
                         <em>(total reviews: <%= book.reviews.length %>)</em>
                     </p>
                     <p>

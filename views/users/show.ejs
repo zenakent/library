@@ -14,7 +14,7 @@
     </div>
         
     <div class="col-md-8">
-        <h3><%= user.username%>'s books</h3>
+        <h3><%= user.username %>'s books</h3>
         <% books.forEach(function(book) { %>
         <ul>
             <li><a href="/library/<%= book.id %>"><%= book.name %></a></li>

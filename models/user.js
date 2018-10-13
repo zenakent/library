@@ -27,5 +27,6 @@ var UserSchema = new mongoose.Schema({
 });
 
 UserSchema.plugin(passportLocalMongoose);
+// UserSchema.plugin(passportLocalMongoose, { usernameField : 'email' }); //use to have email as username
 
 module.exports = mongoose.model("User", UserSchema);

@@ -11,5 +11,13 @@
 }
 
 #jumbotron-top-margin {
-    margin-top: 50px;
+    margin-top: 30px;
+}
+
+#navbar-bot-margin {
+    margin-bottom: 10px;
+}
+
+#main-page-bot-margin {
+    margin-bottom: 20px;
 }

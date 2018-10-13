@@ -39,14 +39,13 @@ router.post("/register", function(req, res) {
     User.register(newUser, req.body.password, function(err, user) {
         if (err) {
             console.log(err);
-            req.flash("error", err.message);
-            return res.render("register");
+            
+            return res.render("register", {error: err.message});
         }
         //log user in after successful registration
         passport.authenticate("local")(req, res, function() {
             req.flash("success", "Welcome to Library " + user.username);
-            
-            res.redirect("/follow/:id");
+            res.redirect("/library");
             
         });
     });
