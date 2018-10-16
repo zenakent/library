@@ -214,7 +214,7 @@ router.delete("/:id", middleware.checkBookOwnership, function (req, res) {
     });
 });
 
-
+//function for protection from regex attacks
 function escapeRegex(text) {
     return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
 }

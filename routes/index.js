@@ -3,6 +3,7 @@ var router = express.Router();
 var passport = require("passport");
 var User = require("../models/user");
 var Book = require("../models/book");
+var Reserve = require("../models/reserve");
 var Notification = require("../models/notification");
 var middleware = require("../middleware/index.js");
 
@@ -12,7 +13,7 @@ var middleware = require("../middleware/index.js");
 //====================================================
 //Landing Page
 router.get("/", function(req, res) {
-    res.render("landing");
+    res.redirect("/library");
 });
 
 
@@ -31,6 +32,7 @@ router.post("/register", function(req, res) {
             lastName: req.body.lastName,
             avatar: req.body.avatar,
             email: req.body.email,
+            aboutme: req.body.aboutme,
             });
     // eval(require('locus'));
     if (req.body.adminCode === "secret1234") {
@@ -75,21 +77,23 @@ router.get("/logout", function(req, res) {
 });
 
 //User profile
-router.get("/users/:id", function(req, res) {
+router.get("/users/:id", middleware.isLoggedIn, function(req, res) {
 
   User.findById(req.params.id).populate('followers').exec(function (err, foundUser) {
       if (err) {
           req.flash("error", "Something went wrong!");
           res.redirect("/");
       }
-      Book.find().where('submitted.id').equals(foundUser._id).exec(function (err, books) {
+      Reserve.find().where('reserved.id').equals(foundUser._id).exec(function (err, reserve) {
           if (err) {
               req.flash("error", "Something went wrong!");
               res.redirect("/");
           } else {
-              res.render("users/show", {user: foundUser, books: books});
+              res.render("users/show", {user: foundUser, reserve: reserve});
           }
       });
+      
+      
   });
 
 });

@@ -3,34 +3,54 @@
     <div class="row">
         <div class="col">
             <div class="img-thumbnail">
-                <img class="img-fluid img-thumbnail mx-auto d-block" src="<%= book.image %>">
+                    <img class="img-fluid img-thumbnail mx-auto d-block zoom" src="<%= book.image %>">
                     <h4 class="text-center"><a href="#"><%= book.name %></a></h4>
                     <h5 class="text-center">by <%= book.author %></a></h5>
                     <p class="text-center">genre: <%= book.genre %></p>
                     <p class="text-center">publisher: <%= book.publisher %></p>
                     <h5 class="text-center"> Overview</h5>
+                     <% if (currentUser && currentUser.isAdmin) { %> 
                     <p class="text-center">Submitted by: <a href="/users/<%= book.submitted.id %>"><%= book.submitted.username %></a>, <%= moment(book.createdAt).fromNow() %></p>
+                    <% } %>
                     <!-- shows number of books available -->
                     <p class="text-center">Books Available to be borrowed: <%= book.available %></p> 
                     <p class="text-center"><%= book.summary %></p>
-                      <% if (currentUser && currentUser.isAdmin) { %> 
-                      <% book.reserves.forEach( function(reserve) { %>
-                        <p class="text-center" id="delete-form">Reserved By: <%= reserve.reserved.username %>
-                        Borrowed Date: <strong><%= moment(reserve.borrowDate).format("dddd, MMMM Do YYYY, h:mm:ss a") %></strong><br>
-                        Return Date: <strong><%= moment(reserve.returnDate).format("dddd, MMMM Do YYYY, h:mm:ss a") %></strong><br>
-                        </p>
-                        <a class="btn btn-warning btn-sm" href="/library/<%= book._id %>/reserve/<%= reserve._id %>/edit">
-                           Book Returned
-                        </a>
-                    <% }) %>
+  
+                   <!-- Trigger/Open The Modal -->
+                    <% if (currentUser && currentUser.isAdmin) { %> 
+                    <button id="myBtn" class="btn btn-primary">Reserved List</button>
+                    
+                    <!-- The Modal -->
+                    <div id="myModal" class="modal">
+                    
+                      <!-- Modal content -->
+                      <div class="modal-content">
+                        <span class="close">&times;</span>
+                        
+                        
+                        <% if (book.reserves.length == 0) {%>
+                            <h3 class="text-center">No one has reserve this book</h3>
+                        <% } else { %>
+                            <% book.reserves.forEach( function(reserve) { %>
+                                <p class="text-center" id="delete-form">Reserved By: <strong><%= reserve.reserved.username %></strong><br>
+                                Borrowed Date: <strong><%= moment(reserve.borrowDate).format("dddd, MMMM Do YYYY, h:mm:ss a") %></strong><br>
+                                Return Date: <strong><%= moment(reserve.returnDate).format("dddd, MMMM Do YYYY, h:mm:ss a") %></strong><br>
+                                </p>
+                                <a class="btn btn-warning btn-sm" href="/library/<%= book._id %>/reserve/<%= reserve._id %>/edit">
+                                   Book Returned
+                                </a>
+                            <% }) %>
+                        <% } %>
+                      
+                    
+                      </div>
+                    
+                    </div>
                     <% } %>
+                    <!-- Trigger/Open The Modal End-->
+                   
                     
                    
-                   
-                    
-                    <% if (currentUser && currentUser.isAdmin) { %>
-                    <p class="text-center">Submitted by: <%= book.submitted.username %></p> <!-- make is so admin is the only one can see this line -->
-                    <% } %>
                     <!-- checks if Admin is logged in and he submitted the book  if(currentUser && book.submitted.id.equals(currentUser._id) || currentUser && currentUser.isAdmin) -->
                     <% if(currentUser && currentUser.isAdmin) { %> 
                         <a class="btn btn-warning btn-md" href="/library/<%= book._id %>/edit">Edit</a>

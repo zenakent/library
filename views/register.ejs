@@ -22,7 +22,7 @@
                     <input class="form-control" type="email" name="email" placeholder="email">
                 </div>
                 <div class="form-group">
-                    <input class="form-control" type="text" name="avatar" placeholder="avatar image url">
+                    <textarea class="form-control" type="text" name="aboutme" placeholder="Write something about you" rows="10" cols="30"></textarea>
                 </div>
                 <% if (currentUser && currentUser.isAdmin) { %>
                 <div class="form-group">
@@ -37,4 +37,5 @@
         </div>
     </div>
 </div>
+
 <% include ./partials/footer %>

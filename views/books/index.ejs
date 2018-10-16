@@ -3,9 +3,11 @@
 <div class="container" id="main-page-bot-margin">
     <header class="jumbotron" id="jumbotron-top-margin">
         <div class="container">
-            <h1>Welcome to our Library</h1>
-            <p>[insert library description here]</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            <h1>Welcome to our Online Library</h1>
+            
+            <p>
+                This is an open source project that will can be used by anyone to make their own library system with Nodejs, Express, and MongoDb
+                Developers can get the source code at https://github.com/zenakent/library
             </p>
             <% if (currentUser && currentUser.isAdmin) { %>
             
@@ -22,7 +24,7 @@
     <div class="row text-center" style="display: flex; flex-wrap: wrap">
         <% library.forEach(function(books) { %>
          <div class="col-md-3 col-sm-6">
-             <div class="img-thumbnail">
+             <div class="img-thumbnail zoom">
                  <img class="img-fluid" alt="Responsive image" src="<%= books.image %>">
                  <div class="caption">
                      <h4><%= books.name %></h4>

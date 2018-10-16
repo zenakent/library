@@ -1,13 +1,14 @@
 var Book = require("../models/book");
 var Review = require("../models/reviews");
+var User = require("../models/user");
 
 //all the midleware goes here
 var middlewareObj = {};
 
 
-middlewareObj.checkBookOwnership = function(req, res, next) {
-    if(req.isAuthenticated()) {
-        Book.findById(req.params.id, function(err, foundBook) {
+middlewareObj.checkBookOwnership = function (req, res, next) {
+    if (req.isAuthenticated()) {
+        Book.findById(req.params.id, function (err, foundBook) {
             if (err || !foundBook) {
                 req.flash("error", "Sorry, that book does not exist!");
                 res.redirect("/library");
@@ -22,10 +23,25 @@ middlewareObj.checkBookOwnership = function(req, res, next) {
         });
     }
 };
+
+middlewareObj.checkProfileOwnership = function (req, res, next) {
+    if (req.isAuthenticated()) {
+        User.findById(req.params.id, function (err, foundUser) {
+            if (err || !foundUser) {
+                req.flash("error", "That user does not exit!");
+            } else if (foundUser.id.equal(req.params.id) || req.user.isAdmin) {
+                req.user = foundUser;
+            } else {
+                req.flash("error", "You do not have permission to do that");
+                res.redirect("back");
+            }
+        });
+    }
+};
     
 
 
-middlewareObj.checkReviewOwnership = function(req, res, next) {
+middlewareObj.checkReviewOwnership = function (req, res, next) {
     if (req.isAuthenticated()){
         Review.findById(req.params.review_id, function(err, foundReview){
             if(err || !foundReview){
@@ -82,7 +98,7 @@ middlewareObj.isLoggedIn = function(req, res, next) {
         req.flash("error", "Please Login First!");
         res.redirect("/login");
     }
-}
+};
 
 middlewareObj.isAdmin = function(req, res, next) {
     if (req.user.isAdmin) {
@@ -91,6 +107,6 @@ middlewareObj.isAdmin = function(req, res, next) {
         req.flash("error", "You are not Admin!");
         res.redirect("/library");
     }
-}
+};
 
 module.exports = middlewareObj;

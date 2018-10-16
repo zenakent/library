@@ -9,6 +9,13 @@ var reserveSchema = mongoose.Schema({
             ref: "User"
         },
         username: String
+    },
+    book: {
+        id: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Book"
+        },
+        name: String
     }
 });
 

@@ -27,15 +27,20 @@ router.get("/new", function(req, res) {
 router.post("/", middleware.isLoggedIn,  async function(req, res) {
     //lookup book using id
     // console.log("this is available " + req.body.available);
+    
     var username = req.user.username;
     var userId = req.user._id;
-    var available = req.body.available;
+    
     var daysToAdd = 2;
     var id = '5b70bb0f58e4610cf8181b92';
-    var reservedBy = {username: username, userId: userId, available: available};
+    
 // ===================================================================================
     try {
         let book = await Book.findById(req.params.id);
+        var bookName = book.name;
+        var bookId = book._id;
+        var reservedBy = {username: username, userId: userId, bookName: bookName, bookId: bookId};
+        
         let reserve = await Reserve.create(reservedBy);
         // let user = await User.findById(req.user._id).populate('followers').exec();
         let user = await User.findById(id).exec();
@@ -43,22 +48,27 @@ router.post("/", middleware.isLoggedIn,  async function(req, res) {
         reserve.returnDate = reserve.borrowDate.setDate(reserve.borrowDate.getDate() + daysToAdd);
         reserve.reserved.id = reservedBy.userId;
         reserve.reserved.username = reservedBy.username;
+        reserve.book.name = reservedBy.bookName;
+        reserve.book.id = reservedBy.bookId;
         reserve.save();
         
+        
         book.reserves.push(reserve);
+        
+       
         if (book.available < 1) {
             req.flash("error", "There are no more available books");
             res.redirect("/library/" + book._id);
         } else {
             book.available--;
             await book.save();
-            
+             eval(require("locus"))
             
             let newNotification = {
             username:req.user.username,
             bookId: book.id,
             bookName: book.name
-            }
+            };
         
             let notification = await Notification.create(newNotification);
             user.notifications.push(notification);

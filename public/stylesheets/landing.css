@@ -40,7 +40,7 @@ body {
 }
 
 .slideshow li:nth-child(1) { 
-  background-image: url(https://i.imgur.com/aEj7AZ6.gif) 
+background-image: url(https://i.imgur.com/aEj7AZ6.gif) 
 }
 .slideshow li:nth-child(2) { 
   background-image: url(https://i.imgur.com/I47uAef.gif);
