@@ -62,7 +62,7 @@ router.post("/", middleware.isLoggedIn,  async function(req, res) {
         } else {
             book.available--;
             await book.save();
-             eval(require("locus"))
+            //  eval(require("locus"))
             
             let newNotification = {
             username:req.user.username,

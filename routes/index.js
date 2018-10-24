@@ -13,7 +13,7 @@ var middleware = require("../middleware/index.js");
 //====================================================
 //Landing Page
 router.get("/", function(req, res) {
-    res.redirect("/library");
+    res.render("landing");
 });
 
 
@@ -46,7 +46,7 @@ router.post("/register", function(req, res) {
         }
         //log user in after successful registration
         passport.authenticate("local")(req, res, function() {
-            req.flash("success", "Welcome to Library " + user.username);
+            req.flash("success", "Successfully Registered, Welcome to our Library " + user.username);
             res.redirect("/library");
             
         });
@@ -92,10 +92,7 @@ router.get("/users/:id", middleware.isLoggedIn, function(req, res) {
               res.render("users/show", {user: foundUser, reserve: reserve});
           }
       });
-      
-      
   });
-
 });
 
 // router.get('/users/:id', async function(req, res) {

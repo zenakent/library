@@ -24,9 +24,9 @@ var reserveRoutes = require("./routes/reserve");
 //====================================================
 
 
-mongoose.connect("mongodb://localhost:27017/library", { useNewUrlParser: true }); //used to connect to localDB
+// mongoose.connect("mongodb://localhost:27017/library", { useNewUrlParser: true }); //used to connect to localDB
 // mongodb://maui:a12345@ds123783.mlab.com:23783/library //used to connect to onlineDB
-// mongoose.connect("mongodb://maui:a12345@ds123783.mlab.com:23783/library", { useNewUrlParser: true });
+mongoose.connect("mongodb://maui:a12345@ds123783.mlab.com:23783/library", { useNewUrlParser: true });
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
